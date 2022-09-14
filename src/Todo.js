@@ -4,6 +4,7 @@ import { Amplify, API, graphqlOperation } from 'aws-amplify'
 import { createTodo } from './graphql/mutations'
 import { listTodos } from './graphql/queries'
 
+import { ItemCard } from "./ui-components";
 
 
 import awsExports from "./aws-exports";
@@ -59,6 +60,9 @@ const Todo = () => {
   return (
     <div style={styles.container}>
       <h2>Amplify Todos</h2>
+
+
+
       <input
         onChange={event => setInput('name', event.target.value)}
         style={styles.input}
@@ -72,14 +76,22 @@ const Todo = () => {
         placeholder="Description"
       />
       <button style={styles.button} onClick={addTodo}>Create Todo</button>
+
       {
+        todos.map((todo, index) => (
+            <ItemCard todo={todos[index]} />
+        ))
+      }
+
+      {
+/*
         todos.map((todo, index) => (
           <div key={todo.id ? todo.id : index} style={styles.todo}>
             <p style={styles.todoName}>{todo.name}</p>
             <p style={styles.todoDescription}>{todo.description}</p>
           </div>
         ))
-      }
+*/}
     </div>
   )
 }
