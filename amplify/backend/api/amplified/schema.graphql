@@ -6,7 +6,7 @@ type Question @model @auth(rules: [{allow: public}]) {
   updateDate: AWSDateTime
 }
 
-type Todo @model @auth(rules: [{allow: public}]) {
+type Todo @model @auth(rules: [{allow: groups, groups: ["teacher"], operations: [read, create, update, delete]}]) {
   id: ID!
   name: String!
   description: String
