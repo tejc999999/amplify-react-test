@@ -8,9 +8,13 @@ import { BrowserRouter } from 'react-router-dom';
 
 // アプリのエントリポイントで、認証の構成ファイルを読み込む
 // 既存の認証リソース（Cognito）を使用する場合、configureに詳細な既存構成を指定する
-import { Amplify } from 'aws-amplify';
+import { Amplify, AuthModeStrategyType } from 'aws-amplify';
 import awsExports from './aws-exports';
-Amplify.configure(awsExports);
+Amplify.configure({awsExports,
+  DataStore: {
+    authModeStrategyType: AuthModeStrategyType.MULTI_AUTH
+  }
+});
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
